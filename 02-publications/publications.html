@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publications | Dr Filip Biały</title>
+  <meta name="description" content="Publications by Dr Filip Biały.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header>
+    <a class="site-title" href="index.html">Dr Filip Biały</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="index.html">Bio</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="publications.html" aria-current="page">Publications</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="theme-switch" aria-pressed="false">Dark mode</button>
+  </header>
+
+  <main id="main">
+    <h1>Publications</h1>
+    <p class="lead">Selected publications and work in progress.</p>
+
+    <div class="filters" role="group" aria-label="Show publications by type">
+      <button type="button" class="filter-button" data-type="all" aria-pressed="true">All</button>
+      <button type="button" class="filter-button" data-type="Book" aria-pressed="false">Books</button>
+      <button type="button" class="filter-button" data-type="Journal article" aria-pressed="false">Journal articles</button>
+      <button type="button" class="filter-button" data-type="Report" aria-pressed="false">Reports</button>
+    </div>
+
+    <p class="count" id="publication-count" aria-live="polite"></p>
+
+    <ol class="publications" id="publication-list"></ol>
+
+    <noscript>
+      <p>Please switch on JavaScript to see the list of publications.</p>
+    </noscript>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Filip Biały</p>
+  </footer>
+  <script src="js/main.js"></script>
+  <script src="js/publications.js"></script>
+</body>
+</html>

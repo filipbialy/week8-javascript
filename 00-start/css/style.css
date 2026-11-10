@@ -1,0 +1,328 @@
+/* ==========================================================
+   Start of the JavaScript session (the final site from Week 6)
+   ========================================================== */
+
+/* 1. Design tokens: every colour, font and spacing value
+      is defined once here and reused everywhere else. */
+:root {
+  /* Colours */
+  --color-bg: #fbfaf7;
+  --color-surface: #ffffff;
+  --color-text: #1f2933;
+  --color-muted: #52606d;
+  --color-accent: #1d4e89;
+  --color-accent-soft: #e3ecf7;
+  --color-border: #d9dee4;
+  --color-on-accent: #ffffff; /* NEW in 05: text on accent backgrounds */
+  --color-focus: #c2410c;     /* NEW in 05: keyboard focus outline */
+
+  /* Fonts */
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+
+  /* Spacing scale */
+  --space-xs: 0.25rem;
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: 2rem;
+  --space-xl: 4rem;
+
+  /* Other */
+  --radius: 0.5rem;
+
+  /* NEW in 05: tell the browser we support light and dark,
+     so form controls and scrollbars match */
+  color-scheme: light dark;
+}
+
+/* 2. A sensible starting point */
+html {
+  scroll-behavior: smooth; /* NEW in 05: smooth jump for the skip link */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+/* 3. Typography */
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+h1 {
+  /* CHANGED in 04: grows smoothly between phone and desktop */
+  font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+  margin-block: 0 var(--space-m);
+}
+
+h2 {
+  /* CHANGED in 04 */
+  font-size: clamp(1.4rem, 1.2rem + 1vw, 1.75rem);
+  margin-block: var(--space-l) var(--space-s);
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-block: 0 var(--space-s);
+}
+
+p {
+  margin-block: 0 var(--space-m);
+}
+
+.lead {
+  font-size: 1.25rem;
+  color: var(--color-muted);
+}
+
+a {
+  color: var(--color-accent);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+cite {
+  font-style: italic;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==========================================================
+   NEW in checkpoint 03: layout
+   ========================================================== */
+
+/* 4. Header: site title on the left, navigation on the right */
+header {
+  /* CHANGED in 04: stacked on phones, a row on wider screens (see media query below) */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-s);
+  padding: var(--space-m);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* 5. Navigation: a list of links laid out in a row */
+nav ul {
+  display: flex;
+  flex-wrap: wrap; /* CHANGED in 04: links move to a new line if there is no room */
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav a {
+  display: block;
+  padding: var(--space-s); /* CHANGED in 04: slimmer on phones, wider from 48rem */
+  border-radius: var(--radius);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: background-color 0.2s ease; /* NEW in 05 */
+}
+
+nav a:hover {
+  background-color: var(--color-accent-soft);
+}
+
+/* The link to the page we are on */
+nav a[aria-current="page"] {
+  background-color: var(--color-accent);
+  color: var(--color-on-accent); /* CHANGED in 05: a token, so dark mode can change it */
+}
+
+/* 6. Main content: centred, with a comfortable maximum width */
+main {
+  max-width: 64rem;
+  margin-inline: auto;
+  padding: var(--space-l) var(--space-m); /* CHANGED in 04: smaller padding on phones */
+}
+
+/* 7. Bio intro: portrait next to the name */
+.intro {
+  display: flex;
+  flex-wrap: wrap; /* CHANGED in 04: the portrait sits above the name on narrow screens */
+  align-items: center;
+  gap: var(--space-l);
+  margin-bottom: var(--space-l);
+}
+
+.intro img {
+  border-radius: 50%;
+}
+
+/* NEW in 04: the text takes the remaining space, and only
+   drops below the portrait when it would be narrower than 18rem */
+.intro > div {
+  flex: 1 1 18rem;
+}
+
+/* 8. Cards in a grid of three columns */
+.cards {
+  display: grid;
+  /* CHANGED in 04: as many columns as fit, each at least 16rem wide.
+     No media query needed. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: var(--space-l);
+  margin-block: var(--space-l);
+}
+
+.card {
+  padding: var(--space-m) var(--space-l);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+/* 9. Footer */
+footer {
+  padding: var(--space-l);
+  text-align: center;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ==========================================================
+   NEW in checkpoint 04: wider screens
+   ========================================================== */
+
+/* From 48rem (about 768px) upwards: header in one row,
+   more space around the content */
+@media (min-width: 48rem) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-m) var(--space-l);
+  }
+
+  nav a {
+    padding: var(--space-s) var(--space-m);
+  }
+
+  main {
+    padding: var(--space-xl) var(--space-l);
+  }
+}
+
+/* ==========================================================
+   NEW in checkpoint 05: dark mode and accessibility
+   ========================================================== */
+
+/* 10. Dark mode: only the tokens change, every rule above
+       picks up the new values automatically */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #11161d;
+    --color-surface: #1a212b;
+    --color-text: #e6e9ee;
+    --color-muted: #a3adba;
+    --color-accent: #8ab4f8;
+    --color-accent-soft: #24324a;
+    --color-border: #2e3946;
+    --color-on-accent: #11161d;
+    --color-focus: #fdba74;
+  }
+}
+
+/* 11. A clearly visible outline for keyboard users only */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* 12. Skip link: hidden until a keyboard user tabs to it */
+.skip-link {
+  position: absolute;
+  top: var(--space-s);
+  left: var(--space-s);
+  z-index: 10;
+  padding: var(--space-s) var(--space-m);
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  border-radius: var(--radius);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* 13. Respect users who ask their system for less motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
+/* ==========================================================
+   NEW in checkpoint 06: styles for the other pages
+   ========================================================== */
+
+/* 14. Research page: its cards use h2 headings */
+.card h2 {
+  margin-top: 0;
+}
+
+/* 15. Teaching page: course codes */
+.course-code {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+/* 16. Publications page */
+.publications {
+  padding-left: var(--space-l);
+}
+
+.publications li {
+  margin-bottom: var(--space-m);
+}
+
+.publications p {
+  margin: 0;
+}
+
+.status {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}

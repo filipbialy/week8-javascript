@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <!-- Placeholder portrait. Replace with a real photo (portrait.jpg) and update the img src. -->
+  <rect width="240" height="240" fill="#d9e2ec"/>
+  <circle cx="120" cy="96" r="44" fill="#829ab1"/>
+  <path d="M40 240c0-48 36-80 80-80s80 32 80 80z" fill="#829ab1"/>
+</svg>
